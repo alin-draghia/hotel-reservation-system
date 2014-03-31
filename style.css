@@ -1,0 +1,113 @@
+html {
+	background-color: #D4D4D4;
+	height: 100%;
+}
+
+body {
+	height: 100%;
+}
+
+#wrap {
+	width: 960px;
+	height: 100%;
+	margin: 0 auto;
+	padding: 0;
+	background-color: #FFFFFF;
+}
+
+#header {
+	background: #ddd;
+	margin: 0;
+	padding: 0;
+}
+
+#header h1 {
+	margin: 0;
+	padding: 0;
+}
+
+#nav {
+	background: #c99;
+	margin: 0;
+	padding: 0;
+}
+
+#sidebar {
+	float: left;
+	width: 160px;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	background: #c9c;
+}
+
+#main {
+	float: right;
+	width: 800px;
+	height: 100%;
+	background: #9c9;
+}
+
+#footer {
+	clear: both;
+	background: #cc9;
+}
+
+#nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#nav li {
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+
+#sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+s
+#sidebar li {
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+#sidebar a {
+
+}
+
+#login-form {
+	width: 350px;
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+#login-form input[type=password], input[type=text] {
+	//width: 100%;
+	width: 250px;
+	margin-left: 5px;
+	margin-right: 5px;
+	border-radius: 4px;
+	border: 1px solid;
+}
+
+#login-form input[type=submit] {
+	//width: 100%;
+	text-align:center;
+	width: 150px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 4px;
+	border: 1px solid;
+}
+
+.error-message {
+	color: #FF0000;
+}

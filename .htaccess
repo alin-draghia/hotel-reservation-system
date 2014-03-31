@@ -1,0 +1,4 @@
+php_value db_hostname ="localhost"
+php_value db_username "hrs_php_client"
+php_value db_password login
+php_value db_database hoteluri-brasov-ro
