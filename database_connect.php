@@ -9,7 +9,7 @@ function database_connect() {
     $db_hostname = "localhost";
     $db_username = "root";
     $db_password = "";
-    $db_database = "hoteluri-brasov-ro";
+    $db_database = "hotel_db";
     
     $mysqli = mysqli_connect($db_hostname, $db_username, $db_password, $db_database);
 
