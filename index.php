@@ -1,6 +1,6 @@
-<?php
-include 'header.php';
-?>
+<?php session_start(); ?>
+
+<?php include 'header.php'; ?>
 
 
 	<h2>Column 1</h2>
@@ -23,6 +23,4 @@ include 'header.php';
 
 
 
-<?php
-    include 'footer.php';
-?>
+<?php include 'footer.php'; ?>

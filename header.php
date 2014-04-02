@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 function logout() {
     echo "logout was called";

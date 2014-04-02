@@ -1,8 +1,6 @@
-<?php
-require_once "database_connect.php";
- ?>
-
 <?php session_start(); ?>
+
+<?php require_once "database_connect.php";  ?>
 
 <?php
 
@@ -86,9 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 
-<?php
-include 'header.php';
-?>
+<?php include 'header.php'; ?>
 
 <div id="login-form">
     <form method="post" action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
@@ -110,6 +106,5 @@ include 'header.php';
         </fieldset>
     </form>
 </div>
-<?php
-include 'footer.php';
-?>
+
+<?php include 'footer.php'; ?>

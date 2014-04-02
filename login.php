@@ -1,8 +1,6 @@
-<?php
-require_once "database_connect.php";
- ?>
-
 <?php session_start(); ?>
+
+<?php require_once "database_connect.php"; ?>
 
 <?php
 function validate() {
@@ -12,9 +10,7 @@ function validate() {
         return TRUE;
     }
 }
-?>
 
-<?php
 function login($user, $pass) {
 
     $conn = database_connect();
@@ -35,9 +31,8 @@ function login($user, $pass) {
 
     return FALSE;
 }
-?>
 
-<?php
+
 $errstr = "";
 
 $user_err = "";
@@ -61,9 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<?php
-include 'header.php';
-?>
+<?php include 'header.php'; ?>
 
 <div id="login-form">
     <form method="post" action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
@@ -83,6 +76,5 @@ include 'header.php';
         </fieldset>
     </form>
 </div>
-<?php
-include 'footer.php';
-?>
+
+<?php include 'footer.php'; ?>
