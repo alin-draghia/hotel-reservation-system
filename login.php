@@ -5,7 +5,17 @@ require_once "database_connect.php";
 <?php session_start(); ?>
 
 <?php
-function do_login($user, $pass) {
+function validate() {
+    if (empty($_POST["username"]) || empty($_POST["password"])) {
+        return FALSE;
+    } else {
+        return TRUE;
+    }
+}
+?>
+
+<?php
+function login($user, $pass) {
 
     $conn = database_connect();
 
@@ -35,18 +45,18 @@ $pass_err = "";
 
 $user = "";
 $pass = "";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST["username"]) || empty($_POST["password"])) {
-        $errstr = "Username and password requered!";
-    } else {
+    if (validate()) {
         $user = $_POST["username"];
         $pass = $_POST["password"];
-        if (!do_login($user, $pass)) {
+        if (!login($user, $pass)) {
             $errstr = "Login failed!";
         } else {
             header("location:index.php");
         }
+    } else {
+        $user = $_POST["username"];
+        $errstr = "Username and password requered!";
     }
 }
 ?>
@@ -61,7 +71,7 @@ include 'header.php';
             <legend>Login Form</legend>
             <span class="error-message"><?php echo $errstr ?></span><br>
             <label for="username">User:</label>
-            <input type="text" name="username" />
+            <input type="text" name="username" value="<?php echo $user; ?>"/>
             <br />
             <label for="passwork">Pass:</label>
             <input type="password" name="password"/>
@@ -69,7 +79,7 @@ include 'header.php';
             <p style="text-align: center;">
             <input type="submit" value="Login"/>
             </p>
-            <a href="register_form.php">Register new accout</a>
+            <a href="register.php">Register new accout</a>
         </fieldset>
     </form>
 </div>
