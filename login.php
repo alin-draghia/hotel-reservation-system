@@ -26,6 +26,7 @@ function login($user, $pass) {
     $count = mysqli_num_rows($resutl);
 
     if ($count == 1) {
+        $_SESSION["login_user"] = $user;
         return TRUE;
     }
 

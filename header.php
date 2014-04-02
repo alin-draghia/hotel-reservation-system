@@ -1,7 +1,18 @@
 <?php
 
+function get_login_user() {
+    if (isset($_SESSION["login_user"])) {
+        return $_SESSION["login_user"];
+    } else {
+        return null;
+    }
+}
+
 function logout() {
     echo "logout was called";
+    if (isset($_SESSION["login_user"])) {
+        unset($_SESSION["login_user"]);
+    }
     header("location: index.php");
 }
 
@@ -47,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 					</li>
 				</ul>
 
-				<span style="float: right; display: inline;"> <a href="<?php echo $_SERVER['PHP_SELF'] . '?logout=1'; ?>"> <?php echo "[username logout]"; ?></a> </span>
+				<span style="float: right; display: inline;"> <a href="<?php echo $_SERVER['PHP_SELF'] . '?logout=1'; ?>"> <?php if(get_login_user()){echo "[".get_login_user()."]";} ?></a> </span>
 				<div style="clear: both;"></div>
 			</div>
 

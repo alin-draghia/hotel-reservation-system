@@ -24,14 +24,15 @@ function check_exists($user) {
     $conn = database_connect();
 
     $user = stripcslashes($user);
-    $pass = stripcslashes($pass);
     $user = mysqli_escape_string($conn, $user);
-    $pass = mysqli_escape_string($conn, $pass);
 
     $query = "select username from user where username='$user'";
     $resutl = mysqli_query($conn, $query, MYSQLI_STORE_RESULT);
-
-    return $resutl;
+    $count = mysqli_num_rows($resutl);
+    if ($count == 1) {
+        return TRUE;
+    }
+    return FALSE;
 }
 
 function register($user, $pass) {
@@ -45,9 +46,8 @@ function register($user, $pass) {
     $query = "insert into user (username,password) values ('$user','$pass')";
     $resutl = mysqli_query($conn, $query, MYSQLI_STORE_RESULT);
 
-    $count = mysqli_num_rows($resutl);
-
-    if ($count == 1) {
+    if ($resutl == TRUE) {
+        $_SESSION["login_user"] = $user;
         return TRUE;
     }
     return FALSE;
