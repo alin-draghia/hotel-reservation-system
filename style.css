@@ -1,18 +1,21 @@
 html {
-	background-color: #D4D4D4;
+	background-color: #D4D4D4;//
 	height: 100%;
+	min-height: 100%;
 }
 
-body {
+body {//
 	height: 100%;
+	min-height: 100%;
 }
 
 #wrap {
-	width: 960px;
+	width: 960px;//
 	height: 100%;
+	min-height: 100%;
 	margin: 0 auto;
 	padding: 0;
-	background-color: #FFFFFF;
+	background: #c9c;
 }
 
 #header {
@@ -86,13 +89,13 @@ s
 #login-form {
 	width: 350px;
 	margin-top: 100px;
+	margin-bottom: 100px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-
-#login-form input[type=password], input[type=text] {
-	//width: 100%;
+#login-form input[type=password], input[type=text] {//
+	width: 100%;
 	width: 250px;
 	margin-left: 5px;
 	margin-right: 5px;
@@ -100,9 +103,9 @@ s
 	border: 1px solid;
 }
 
-#login-form input[type=submit] {
-	//width: 100%;
-	text-align:center;
+#login-form input[type=submit] {//
+	width: 100%;
+	text-align: center;
 	width: 150px;
 	margin-left: auto;
 	margin-right: auto;
@@ -116,4 +119,25 @@ s
 
 #login-status div {
 	display: inline;
+}
+
+#hotel-list table {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	border-collapse: collapse;
+}
+
+#hotel-list tr, td, th {
+	border: 1px solid black;
+}
+
+#hotel-list td {
+	padding-left: 10px;
+}
+
+#hotel-list th {
+	background-color: green;
+	color: white;
 }
