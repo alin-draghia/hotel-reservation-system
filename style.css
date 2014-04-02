@@ -57,6 +57,8 @@ body {
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	display: inline;
+	float: left;
 }
 
 #nav li {
@@ -110,4 +112,8 @@ s
 
 .error-message {
 	color: #FF0000;
+}
+
+#login-status div {
+	display: inline;
 }
