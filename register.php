@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <legend>Register Form</legend>
             <span class="error-message"><?php echo $errstr ?></span><br>
             <label for="username">User:</label>
-            <input type="text" name="username" value="<?php echo $user; ?>"/>
+            <input type="text" name="username" value="<?php echo $user; ?>" placeholder="user@domain.ext" autofocus/>
             <br />
             <label for="password">Pass:</label>
             <input type="password" name="password"/>

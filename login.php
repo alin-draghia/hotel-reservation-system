@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <legend>Login Form</legend>
             <span class="error-message"><?php echo $errstr ?></span><br>
             <label for="username">User:</label>
-            <input type="text" name="username" value="<?php echo $user; ?>"/>
+            <input type="text" name="username" value="<?php echo $user; ?>" placeholder="user@domain.ext" autofocus/>
             <br />
             <label for="passwork">Pass:</label>
             <input type="password" name="password"/>
