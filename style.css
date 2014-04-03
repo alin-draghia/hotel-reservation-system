@@ -94,7 +94,7 @@ s
 	margin-right: auto;
 }
 
-#login-form input[type=password], input[type=text] {//
+#login-form input[type=password], #login-form input[type=text] {//
 	width: 100%;
 	width: 250px;
 	margin-left: 5px;
@@ -129,7 +129,7 @@ s
 	border-collapse: collapse;
 }
 
-#hotel-list tr, td, th {
+#hotel-list tr, #hotel-list  td, #hotel-list  th {
 	border: 1px solid black;
 }
 
@@ -140,4 +140,42 @@ s
 #hotel-list th {
 	background-color: green;
 	color: white;
+}
+
+.clear {
+	clear: both;
+}
+
+#reservation-form form {
+	background-color: #CC99CC;
+	width: 50%;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+}
+#reservation-form label {
+	text-align: right;
+	width: 150px;
+	float: left;
+}
+
+#reservation-form input[type=text], #reservation-form input[type=date], #reservation-form input[type=number] {
+	width: 150px;
+	margin-left: 15px;
+	float: left;
+}
+
+#reservation-form p {
+	clear: both;
+}
+
+#reservation-form span {
+	clear: both;
+	width: 200px;
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
 }
