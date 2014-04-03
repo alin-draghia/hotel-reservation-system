@@ -1,20 +1,6 @@
 <?php
 
-function get_login_user() {
-    if (isset($_SESSION["login_user"])) {
-        return $_SESSION["login_user"];
-    } else {
-        return null;
-    }
-}
-
-function logout() {
-    echo "logout was called";
-    if (isset($_SESSION["login_user"])) {
-        unset($_SESSION["login_user"]);
-    }
-    header("location: index.php");
-}
+require_once 'my_api.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (isset($_GET["logout"])) {

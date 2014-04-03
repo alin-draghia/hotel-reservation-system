@@ -52,7 +52,7 @@ function main() {
             print("<tr>");
             print("<td>" . $room_type . "</td>");
             print("<td>" . $room_price . "</td>");
-            print("<td style='width:150px;'><a href='$reservation_link'>Make reservation</a></td>");
+            print("<td style='width:150px;'><a href='$reservation_link'>[Make reservation]</a></td>");
             print("</tr>");
         }
 

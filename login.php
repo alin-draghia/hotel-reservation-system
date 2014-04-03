@@ -1,6 +1,9 @@
 <?php session_start(); ?>
 
-<?php require_once "database_connect.php"; ?>
+<?php
+require_once "database_connect.php";
+require_once 'my_api.php';
+?>
 
 <?php
 function validate() {
@@ -10,29 +13,6 @@ function validate() {
         return TRUE;
     }
 }
-
-function login($user, $pass) {
-
-    $conn = database_connect();
-
-    $user = stripcslashes($user);
-    $pass = stripcslashes($pass);
-    $user = mysqli_escape_string($conn, $user);
-    $pass = mysqli_escape_string($conn, $pass);
-
-    $query = "select username, password from user where username='$user' and password='$pass'";
-    $resutl = mysqli_query($conn, $query, MYSQLI_STORE_RESULT);
-
-    $count = mysqli_num_rows($resutl);
-
-    if ($count == 1) {
-        $_SESSION["login_user"] = $user;
-        return TRUE;
-    }
-
-    return FALSE;
-}
-
 
 $errstr = "";
 
@@ -48,7 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!login($user, $pass)) {
             $errstr = "Login failed!";
         } else {
-            header("location:index.php");
+            if (have_callback_uri()) {
+                call_callback_uri();
+            } else {
+                header("location:index.php");   
+            }            
         }
     } else {
         $user = $_POST["username"];
@@ -57,7 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<?php include 'header.php'; ?>
+<?php
+    include 'header.php';
+  ?>
 
 <div id="login-form">
     <form method="post" action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
@@ -78,4 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php
+include 'footer.php';
+ ?>

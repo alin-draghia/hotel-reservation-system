@@ -1,6 +1,9 @@
 <?php session_start(); ?>
 
-<?php require_once "database_connect.php";  ?>
+<?php
+require_once "database_connect.php";
+require_once 'my_api.php';
+?>
 
 <?php
 
@@ -18,39 +21,6 @@ function validate() {
         return array(FALSE, "Password and Password2 must match!");
     }
     return array(TRUE, "");
-}
-
-function check_exists($user) {
-    $conn = database_connect();
-
-    $user = stripcslashes($user);
-    $user = mysqli_escape_string($conn, $user);
-
-    $query = "select username from user where username='$user'";
-    $resutl = mysqli_query($conn, $query, MYSQLI_STORE_RESULT);
-    $count = mysqli_num_rows($resutl);
-    if ($count == 1) {
-        return TRUE;
-    }
-    return FALSE;
-}
-
-function register($user, $pass) {
-    $conn = database_connect();
-
-    $user = stripcslashes($user);
-    $pass = stripcslashes($pass);
-    $user = mysqli_escape_string($conn, $user);
-    $pass = mysqli_escape_string($conn, $pass);
-
-    $query = "insert into user (username,password) values ('$user','$pass')";
-    $resutl = mysqli_query($conn, $query, MYSQLI_STORE_RESULT);
-
-    if ($resutl == TRUE) {
-        $_SESSION["login_user"] = $user;
-        return TRUE;
-    }
-    return FALSE;
 }
 
 // Main starts here
@@ -72,7 +42,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errstr = "Username allready exists";
         } else {
             if (register($user, $pass)) {
-                header("location:index.php");
+                if (have_callback_uri()) {
+                    call_callback_uri();
+                } else {
+                    header("location:index.php");
+                }
             } else {
                 $errstr = "Registration failed!";
             }
@@ -84,7 +58,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 
-<?php include 'header.php'; ?>
+<?php
+include 'header.php';
+ ?>
 
 <div id="login-form">
     <form method="post" action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
@@ -107,4 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php
+include 'footer.php';
+ ?>

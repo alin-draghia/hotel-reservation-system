@@ -3,6 +3,14 @@
 
 <?php
 function main() {
+    
+    // if the user is not login then round trip to login page
+    // and come back later with my own callback mechanism
+    $request_uri = $_SERVER["REQUEST_URI"];
+    if (!get_login_user()) {
+        set_callback_uri($request_uri);
+        header('location: login.php');
+    }
     return null;
 }
 ?>
