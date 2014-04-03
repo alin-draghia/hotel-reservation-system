@@ -44,13 +44,15 @@ function main() {
         $con -> next_result();
 
         foreach ($rooms as $room) {
+            $room_type_id = $room["RoomTypeId"];
             $room_type = $room["RoomType"];
             $room_price = $room["RoomPrice"];
             $num_rooms = $room["NumRooms"];
+            $reservation_link = "newreservation.php?"."HotelId=".urlencode($hotel_id)."&"."RoomTypeId=".urlencode($room_type_id);
             print("<tr>");
             print("<td>" . $room_type . "</td>");
             print("<td>" . $room_price . "</td>");
-            print("<td style='width:150px;'><a href='#'>Make reservation</a></td>");
+            print("<td style='width:150px;'><a href='$reservation_link'>Make reservation</a></td>");
             print("</tr>");
         }
 
