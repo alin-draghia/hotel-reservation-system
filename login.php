@@ -1,7 +1,6 @@
 <?php session_start(); ?>
 
 <?php
-require_once "database_connect.php";
 require_once 'my_api.php';
 ?>
 

@@ -44,15 +44,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 					</li>
 				</ul>
 
-				<span style="float: right; display: inline;"> <a href="<?php echo $_SERVER['PHP_SELF'] . '?logout=1'; ?>"> <?php if(get_login_user()){echo "[".get_login_user()."]";} ?></a> </span>
+				<span style="float: right; display: inline;"> 
+				    <a href="<?php echo $_SERVER['PHP_SELF'] . '?logout=1'; ?>"> 
+				        <?php if(get_login_user()){echo "[logout ".get_login_user()."]";} ?>
+				    </a> 
+				</span>
 				<div style="clear: both;"></div>
 			</div>
 
 			<div id="sidebar">
-				<h2>Column2</h2>
-				<p>
-					Lorem ipsum
-				</p>
+				<h2>Menu</h2>
+		
 				<ul>
 					<li>
 						<a href="index.php">[Home]</a>

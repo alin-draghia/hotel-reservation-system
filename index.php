@@ -3,7 +3,7 @@
 <?php include 'header.php'; ?>
 
 
-	<h2>Column 1</h2>
+	<h2>Hotels in Brasov</h2>
 
 	<p>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor hendrerit posuere. Nullam convallis tellus eu turpis fermentum ultricies. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris eget est eu turpis congue consequat. Aliquam vulputate hendrerit ante, et venenatis felis adipiscing at. Vivamus tempor orci in lacinia suscipit. In ac quam metus. Nullam mollis ligula sed justo pulvinar, tincidunt scelerisque enim bibendum. Phasellus dictum, mauris quis porta interdum, nisi est adipiscing nibh, eget placerat quam lectus vitae massa. Nunc ultrices tortor id fringilla fermentum. Proin gravida odio quis diam facilisis venenatis. Donec iaculis sagittis enim. Nam at neque vitae quam suscipit interdum vel quis leo. Cras facilisis sem ligula, sed tincidunt erat commodo quis. Sed eu ante sagittis, laoreet odio eleifend, pretium velit. Sed at mi erat.

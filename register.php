@@ -1,14 +1,13 @@
 <?php session_start(); ?>
 
 <?php
-require_once "database_connect.php";
 require_once 'my_api.php';
 ?>
 
 <?php
 
 function validate() {
-    if (empty($_POST["username"])) {
+    if (empty($_POST["username"])) {        
         return array(FALSE, "Username required!");
     }
     if (empty($_POST["password"])) {

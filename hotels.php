@@ -5,7 +5,6 @@ include 'header.php';
 
 <?php
 
-include 'database_connect.php';
 
 function main() {
     $con = database_connect();
@@ -59,6 +58,8 @@ function main() {
         print("</table>");
 
     }
+
+    $con->close();
 
 }
 ?>
