@@ -19,10 +19,8 @@ function main() {
     $user = get_login_user();
     $user_id = get_user_id($user);
 
-    $conn = database_connect();
-    $result = $conn -> query("call getReservations($user_id)");
-
-    $reservations = $result -> fetch_all(MYSQLI_ASSOC);
+    
+    $reservations = get_reservations($user_id);
 
     foreach ($reservations as $reservation) {
         $hotel_name = $reservation["Name"];
@@ -66,7 +64,6 @@ function main() {
         print("</table>");
     }
 
-    $conn -> close();
 }
 ?>
 
