@@ -150,18 +150,19 @@ function get_reservations($user_id)
 {
     
     $query = "
-SELECT 
-`Reservation`.`StartDate`,
-`Reservation`.`EndData`,
-`Reservation`.`Status`,
-`ReservationDetails`.`NumberOfRooms` AS `ReservationNumberOfRooms`,
-`HotelDetails`.`Price`,
-`Hotel`.`Name` 
-FROM Reservation
-LEFT JOIN `hotel_db`.`ReservationDetails` ON `Reservation`.`idReservation` = `ReservationDetails`.`Reservation_idReservation` 
-LEFT JOIN `hotel_db`.`Hotel` ON `ReservationDetails`.`Hotel_idHotel` = `Hotel`.`idHotel` 
-LEFT JOIN `hotel_db`.`HotelDetails` ON `Hotel`.`idHotel` = `HotelDetails`.`Hotel_idHotel` 
-WHERE(( user_iduser = $user_id))
+        SELECT 
+            `Reservation`.`idReservation`,
+            `Reservation`.`StartDate`,
+            `Reservation`.`EndData`,
+            `Reservation`.`Status`,
+            `ReservationDetails`.`NumberOfRooms` AS `ReservationNumberOfRooms`,
+            `HotelDetails`.`Price`,
+            `Hotel`.`Name` 
+        FROM Reservation
+            LEFT JOIN `hotel_db`.`ReservationDetails` ON `Reservation`.`idReservation` = `ReservationDetails`.`Reservation_idReservation` 
+            LEFT JOIN `hotel_db`.`Hotel` ON `ReservationDetails`.`Hotel_idHotel` = `Hotel`.`idHotel` 
+            LEFT JOIN `hotel_db`.`HotelDetails` ON `Hotel`.`idHotel` = `HotelDetails`.`Hotel_idHotel` 
+        WHERE(( user_iduser = $user_id))
     ";
     
     $reservations = null;
@@ -184,7 +185,12 @@ function get_hotels() {
     if($r)
     {
         $hotels = $r->fetch_all(MYSQLI_ASSOC);
+    } 
+    else
+    {
+        $hotels = [];
     }
+    
     $db->close();
     
     return $hotels;
@@ -243,6 +249,32 @@ function insert_hotel_room()
 
     $db->close();
     
+}
+
+function confirm_reservation($reservation_id)
+{
+    $db = database_connect();
+    
+    $new_status = "confirmed";
+    
+    $sql = "UPDATE Reservation SET Status='$new_status' WHERE idReservation=$reservation_id";
+    
+    $result = $db->query($sql);
+    
+    $db->close();
+}
+
+function cancel_reservation($reservation_id)
+{
+    $db = database_connect();
+    
+    $new_status = "canceled";
+    
+    $sql = "UPDATE Reservation SET Status='$new_status' WHERE idReservation=$reservation_id";
+    
+    $db->query($sql);
+    
+    $db->close();
 }
 
 ?>

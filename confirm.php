@@ -2,14 +2,11 @@
 
 require_once 'my_api.php';
 
-$conn = database_connect();
 
 $reservation_id = $_GET["ReservationId"];
-$query = "CALL setReservationStatus($reservation_id, 'confirmed')";
-$result = $conn->query($query);
+confirm_reservation($reservation_id);
 
-$conn->close();
-
+// return to the reservations page
 header('location: reservations.php');
 
 ?>
