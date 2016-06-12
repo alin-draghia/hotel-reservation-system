@@ -1,7 +1,7 @@
-            </div>
-            <div id="footer">
+
+            <footer class="footer">
                 <h6>Copyright 2014 Alin Draghia</h6>
-            </div>
+            </footer>
         </div>
     </body>
 </html>
