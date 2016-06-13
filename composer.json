@@ -1,4 +1,6 @@
 {
     "name": "ubuntu/workspace",
-    "require": {}
+    "require": {
+        "illuminate/database": "*"
+    }
 }
