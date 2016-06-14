@@ -9,6 +9,11 @@ class Hotel extends Illuminate\Database\Eloquent\Model
      protected $table = "Hotel";
      
      protected $primaryKey = "idHotel";
+     
+     public function rooms()
+     {
+          return $this->hasMany("HotelDetail", "Hotel_idHotel");
+     }
 }
 
 

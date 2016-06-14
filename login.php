@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					 
 						<div class="panel-body">
 								<div class="row">
-										<div class="col-lg-12">
+										<div class="col-lg-2">
 												<form id="login-form" action='<?= htmlspecialchars($_SERVER[" PHP_SELF "]) ?>' method="post" role="form" style="display: block;">
 														<div class="form-group">
 																<input type="text" id="username" tabindex="1" class="form-control" placeholder="Username" name="username" value="<?= $user; ?>">

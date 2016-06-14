@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<?php include 'header.php'; ?>
+<?php require_once 'header.php'; ?>
 
 <?php 
 
@@ -15,22 +15,23 @@ if (!get_login_user()) {
 $user = get_login_user();
 $user_id = get_user_id($user);
 
-
-$reservations = get_reservations($user_id);
-
 ?>
 
-<?php foreach ($reservations as $reservation) :?>
+<?php foreach (get_reservations($user_id) as $reservation) :?>
+
 
     <?php
-    $reservation_id = $reservation["idReservation"];
-    $hotel_name = $reservation["Name"];
-    $room_type = $reservation["type"];
-    $start_date = $reservation["StartDate"];
-    $end_date = $reservation["EndData"];
-    $number_of_rooms = $reservation["ReservationNumberOfRooms"];
-    $price_per_room = $reservation["Price"];
-    $status = $reservation["Status"];
+ 
+    $reservation_id = $reservation->idReservation;
+    $hotel_name = $reservation->detail->hotel->Name;
+    $room_type = $reservation->detail->roomType->type;
+    $start_date = $reservation->StartDate;
+    $end_date = $reservation->EndData;
+    $number_of_rooms = $reservation->detail->NumberOfRooms;
+    $price_per_room = HotelDetail::where("RoomType_idRoomType", $reservation->detail->roomType->idRoomType)
+                        ->where("Hotel_idHotel", $reservation->detail->hotel->idHotel)
+                        ->first()->Price;
+    $status = $reservation->Status;
     
     if ($status=="canceled") {
         continue;
@@ -74,4 +75,4 @@ $reservations = get_reservations($user_id);
 <?php endforeach; ?>
 
 
-<?php include 'footer.php'; ?>
+<?php require_once 'footer.php'; ?>

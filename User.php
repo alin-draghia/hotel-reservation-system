@@ -9,6 +9,11 @@ class User extends Illuminate\Database\Eloquent\Model
      protected $table = "user";
      
      protected $primaryKey = "iduser";
+     
+     public function reservations()
+     {
+          return $this->hasMany("Reservation", "user_iduser");
+     }
 }
 
 

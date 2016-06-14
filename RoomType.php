@@ -13,3 +13,4 @@ class RoomType extends Illuminate\Database\Eloquent\Model
 
 
 //print(RoomType::all());
+//print(RoomType::find(1));

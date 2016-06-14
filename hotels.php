@@ -1,29 +1,18 @@
-<?php 
-session_start();
-include 'header.php';
-
-$hotels = get_hotels();
-
-?>
+<?php session_start(); ?>
+<?php require_once 'header.php'; ?>
 
 
-<?php foreach ($hotels as $hotel): ?>
-    <?php 
-    $hotel_id = intval($hotel["idHotel"]);
-    $hotel_name = $hotel["Name"];
-    $hotel_descr = $hotel["Description"];
-    
-    $rooms = get_hotel_rooms($hotel_id);
-    ?>
+<?php foreach (get_hotels() as $hotel): ?>
+
     <div class="panel panel-default">
-        <div class="panel-heading">Hotel <?=$hotel_name?></div>
+        <div class="panel-heading">Hotel <?= $hotel->Name ?></div>
         <div class="panel-body">
             <div class="row">
             <div class="col-md-4">
                 <img src="//placehold.it/300x300" class="img-rounded"></img>
             </div>
             <div class="col-md-8">
-                <p><?=$hotel_descr?></p>
+                <p><?= $hotel->Description ?></p>
                 
                 <table class="table">
                     <tr>
@@ -32,18 +21,13 @@ $hotels = get_hotels();
                         <th></th>
                     </tr>
                     
-                    <?php foreach ($rooms as $room): ?>
-                    <?php
-                    $room_type_id = $room["RoomTypeId"];
-                    $room_type = $room["RoomType"];
-                    $room_price = $room["RoomPrice"];
-                    $num_rooms = $room["NumRooms"];
-                    $reservation_link = "newreservation.php?"."HotelId=".urlencode($hotel_id)."&"."RoomTypeId=".urlencode($room_type_id);
-                    ?>
+                    <?php foreach ($hotel->rooms as $room): ?>
+                    
                     <tr>
-                        <td><?=$room_type?></td>
-                        <td><?=$room_price?> $</td>
+                        <td><?= RoomType::find($room->RoomType_idRoomType)->type ?></td>
+                        <td><?= $room->Price ?> $</td>
                         <td>
+                            <?php $reservation_link = "newreservation.php?"."HotelId=".urlencode($hotel->idHotel)."&"."RoomTypeId=".urlencode($room->RoomType_idRoomType); ?>
                             <a class="btn btn-default" href='<?=$reservation_link?>'>Make Reservation</a>
                         </td>
                     </tr>
@@ -57,6 +41,4 @@ $hotels = get_hotels();
 <?php endforeach; ?>
 
 
-<?php
-include 'footer.php';
-?>
+<?php require_once 'footer.php'; ?>

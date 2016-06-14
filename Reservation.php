@@ -9,6 +9,11 @@ class Reservation extends Illuminate\Database\Eloquent\Model
      protected $table = "Reservation";
      
      protected $primaryKey = "idReservation";
+     
+     public function detail()
+     {
+          return $this->hasOne('ReservationDetail', 'Reservation_idReservation');
+     }
 }
 
 

@@ -2,7 +2,14 @@
 
 require_once "database_connect.php";
 
-function check_exists($user) {
+require_once 'User.php';
+require_once 'Hotel.php';
+require_once 'HotelDetail.php';
+require_once 'RoomType.php';
+require_once 'Reservation.php';
+require_once 'ReservationDetail.php';
+
+function _check_exists($user) {
     $conn = database_connect();
 
     $user = stripcslashes($user);
@@ -20,30 +27,33 @@ function check_exists($user) {
     return FALSE;
 }
 
-function login($user, $pass) {
-
-    $db = database_connect();
-
-    $user = stripcslashes($user);
-    $pass = stripcslashes($pass);
-    $user = mysqli_escape_string($db, $user);
-    $pass = mysqli_escape_string($db, $pass);
-
-    $query = "SELECT username, password FROM user WHERE username='$user' AND password='$pass'";
-    $resutl = $db->query($query, MYSQLI_STORE_RESULT);
-
-    $count = mysqli_num_rows($resutl);
-    $db->close();
-     
-    if ($count == 1) {
-        $_SESSION["login_user"] = $user;
+function check_exists($user) 
+{
+    $user = User::where('username', $user)
+                ->first();
+    if($user)
+    {
         return TRUE;
     }
-
     return FALSE;
 }
 
-function register($user, $pass) {
+function login($user, $pass)
+{
+
+    $user = User::where('username', $user)
+                ->where('password', $pass)
+                ->first();
+                
+    if(user)
+    {
+        $_SESSION['login_user'] = $user->username;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+function __register($user, $pass) {
     $conn = database_connect();
 
     $user = stripcslashes($user);
@@ -54,10 +64,23 @@ function register($user, $pass) {
     $query = "INSERT INTO user (username,password) VALUES ('$user','$pass')";
     $resutl = mysqli_query($conn, $query, MYSQLI_STORE_RESULT);
 
- $conn->close();
+    $conn->close();
  
     if ($resutl == TRUE) {
         $_SESSION["login_user"] = $user;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+function register($username, $password) {
+
+    $user = new User;
+    $user->username = $username;
+    $user->password = $password;
+     
+    if ($user->save()) {
+        $_SESSION["login_user"] = $user->username;
         return TRUE;
     }
     return FALSE;
@@ -146,83 +169,15 @@ function make_reservation($user_id, $hotel_id, $room_type_id, $start_date, $end_
     return $r;
 }
 
+
 function get_reservations($user_id)
 {
-    
-    $query = "
-        SELECT 
-            `Reservation`.`idReservation`,
-            `Reservation`.`StartDate`,
-            `Reservation`.`EndData`,
-            `Reservation`.`Status`,
-            `ReservationDetails`.`NumberOfRooms` AS `ReservationNumberOfRooms`,
-            `HotelDetails`.`Price`,
-            `Hotel`.`Name` 
-        FROM Reservation
-            LEFT JOIN `hotel_db`.`ReservationDetails` ON `Reservation`.`idReservation` = `ReservationDetails`.`Reservation_idReservation` 
-            LEFT JOIN `hotel_db`.`Hotel` ON `ReservationDetails`.`Hotel_idHotel` = `Hotel`.`idHotel` 
-            LEFT JOIN `hotel_db`.`HotelDetails` ON `Hotel`.`idHotel` = `HotelDetails`.`Hotel_idHotel` 
-        WHERE(( user_iduser = $user_id))
-    ";
-    
-    $reservations = null;
-    $db = database_connect();
-    $r = $db->query($query, MYSQLI_STORE_RESULT);
-    if($r)
-    {
-        $reservations = $r->fetch_all(MYSQLI_ASSOC);
-    }
-    $db->close();
-    return $reservations;
+    return User::find($user_id)->reservations;
 }
 
-function get_hotels() {
-    $query = "SELECT `idHotel`, `Name`, `Description` FROM `Hotel`";
-    $db = database_connect();
-    
-    $r = $db->query($query, MYSQLI_STORE_RESULT);
-    
-    if($r)
-    {
-        $hotels = $r->fetch_all(MYSQLI_ASSOC);
-    } 
-    else
-    {
-        $hotels = [];
-    }
-    
-    $db->close();
-    
-    return $hotels;
-}
-
-function get_hotel_rooms($hotel_id) {
-    $query = "
-        SELECT 
-            `hoteldetails`.`RoomType_idRoomType` AS `RoomTypeId`,
-        	`roomtype`.`type` AS `RoomType`,
-        	`hoteldetails`.`Price` AS `RoomPrice`, 
-        	`hoteldetails`.`NumberOfRooms` AS `NumRooms`	
-        FROM 
-        	`hotel_db`.`HotelDetails` AS `hoteldetails`, 
-        	`hotel_db`.`Hotel` AS `hotel`, 
-        	`hotel_db`.`RoomType` AS `roomtype` 
-        WHERE 
-        	`hoteldetails`.`Hotel_idHotel` = `hotel`.`idHotel` AND 
-        	`hoteldetails`.`RoomType_idRoomType` = `roomtype`.`idRoomType` AND
-        	`hotel`.`idHotel` = $hotel_id
-        ";
-    
-    $db = database_connect();
-
-    $r = $db->query($query, MYSQLI_STORE_RESULT);
-    
-    $rooms = $r->fetch_all(MYSQLI_ASSOC);
-
-    $db->close();
-    
-    return $rooms;
-    
+function get_hotels()
+{
+    return Hotel::all();
 }
 
 
