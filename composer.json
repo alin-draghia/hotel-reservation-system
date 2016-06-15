@@ -4,6 +4,7 @@
         "illuminate/database": "*",
         "illuminate/routing": "*",
         "illuminate/view": "*",
-        "illuminate/console": "*"
+        "illuminate/console": "*",
+        "illuminate/support": "^5.2"
     }
 }
