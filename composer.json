@@ -1,6 +1,9 @@
 {
     "name": "ubuntu/workspace",
     "require": {
-        "illuminate/database": "*"
+        "illuminate/database": "*",
+        "illuminate/routing": "*",
+        "illuminate/view": "*",
+        "illuminate/console": "*"
     }
 }
