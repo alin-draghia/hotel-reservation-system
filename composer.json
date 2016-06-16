@@ -1,10 +1,10 @@
 {
-    "name": "ubuntu/workspace",
+    "name": "alin_draghia/hotel_php",
     "require": {
-        "illuminate/database": "*",
-        "illuminate/routing": "*",
-        "illuminate/view": "*",
-        "illuminate/console": "*",
-        "illuminate/support": "^5.2"
+         "illuminate/database": "*",
+         "illuminate/routing": "*",
+         "illuminate/view": "*",
+         "illuminate/console": "*",
+         "illuminate/support": "^5.2"
     }
 }
